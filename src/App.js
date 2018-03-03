@@ -9,38 +9,37 @@ import {
 
 const Home = () => (
   <div className="Home">
+		<header className="App-header">
+			<img src={logo} className="App-logo" alt="logo" />
+			<h1 className="App-title">Welcome to React</h1>
+		</header>
     <p className="App-intro">
       To get started, edit <code>src/App.js</code> and save to reload.
     </p>
   </div>
 )
 
-const github = () => (
+const Github = () => (
   <webview src="https://www.github.com/" ></webview>
 )
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <Router>
-          <div>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/github">Github</Link></li>
-            </ul>
-
-            <hr/>
-
-            <Route exact path="/" component={Home}/>
-            <Route path="/github" component={github}/>
-          </div>
-        </Router>
-      </div>
+			<div style={{height: "100%"}}>
+				<div class="sidebar">
+					<ul>
+						<li><a href="#">test</a></li>
+						<li><a href="#">test</a></li>
+						<li><a href="#">test</a></li>
+						<li><a href="#">test</a></li>
+						<li><a href="#">test</a></li>
+					</ul>
+				</div>
+				<div class="content">
+          <Github />
+				</div>
+			</div>
     );
   }
 }
