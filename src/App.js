@@ -1,43 +1,56 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import Webview from './Webview.js'
 
-const Home = () => (
-  <div className="Home">
-		<header className="App-header">
-			<img src={logo} className="App-logo" alt="logo" />
-			<h1 className="App-title">Welcome to React</h1>
-		</header>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
-  </div>
-)
-
-const Github = () => (
-  <webview src="https://www.github.com/" ></webview>
-)
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      websites: ["https://stackoverflow.com/questions/29913387/show-hide-components-in-reactjs", "https://www.github.com/"],
+      selected: "https://www.github.com/",
+    }
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  content = () => {
+    return (
+      this.state.websites.map((website) => {
+        return (
+          <Webview src={website} selected={this.state.selected} />
+        )
+      })
+    )
+  }
+
+  buttons = () => {
+    return (
+      this.state.websites.map((website) => {
+        return (
+          <button
+            type="button"
+            onClick = { () => this.setState({selected: website}) } >
+            { website }
+          </button>
+        )
+      })
+    )
+  }
+
+
   render() {
     return (
 			<div style={{height: "100%"}}>
-				<div class="sidebar">
-					<ul>
-						<li><a href="#">test</a></li>
-						<li><a href="#">test</a></li>
-						<li><a href="#">test</a></li>
-						<li><a href="#">test</a></li>
-						<li><a href="#">test</a></li>
-					</ul>
+				<div className="sidebar">
+          < this.buttons />
 				</div>
-				<div class="content">
-          <Github />
+				<div className="content">
+          < this.content />
 				</div>
 			</div>
     );
