@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Webview from './Webview.js'
-
+import Home from './Home.js'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      websites: ["https://stackoverflow.com/questions/29913387/show-hide-components-in-reactjs", "https://www.github.com/"],
-      selected: "https://www.github.com/",
+      websites: ["https://www.github.com/"],
+      selected: "",
     }
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    console.log('The link was clicked.');
   }
 
   content = () => {
@@ -28,29 +23,40 @@ class App extends Component {
     )
   }
 
-  buttons = () => {
-    return (
-      this.state.websites.map((website) => {
-        return (
-          <button
-            type="button"
-            onClick = { () => this.setState({selected: website}) } >
-            { website }
-          </button>
-        )
-      })
+  sidebar = () => {
+    let links = this.state.websites.map((website) => {
+      return (
+        <button
+          type="button"
+          onClick = { () => this.setState({selected: website}) } >
+          { website }
+        </button>
+      )
+    })
+
+    links.unshift(
+      <button
+        type="button"
+        onClick = { () => this.setState({selected: ''}) } >
+        Home
+      </button>
     )
+    return links;
   }
 
+  addWebsite = (url) => {
+    this.setState({websites: [...this.state.websites, url]})
+  }
 
   render() {
     return (
 			<div style={{height: "100%"}}>
 				<div className="sidebar">
-          < this.buttons />
+          < this.sidebar />
 				</div>
 				<div className="content">
-          < this.content />
+          <Home callback={this.addWebsite.bind(this)} selected={this.state.selected}/>
+          <this.content />
 				</div>
 			</div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Webview extends Component {
   render() {
-    let isSelected = this.props.selected === this.props.src;
+    const isSelected = this.props.selected === this.props.src;
     return (
       <webview
         src={this.props.src}
