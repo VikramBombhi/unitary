@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import Webview from './Webview.js'
 import Home from './Home.js'
+import Sidebar from './Sidebar.js'
 
 class App extends Component {
   constructor(props) {
@@ -23,37 +23,20 @@ class App extends Component {
     )
   }
 
-  sidebar = () => {
-    let links = this.state.websites.map((website) => {
-      return (
-        <button
-          type="button"
-          onClick = { () => this.setState({selected: website}) } >
-          { website }
-        </button>
-      )
-    })
-
-    links.unshift(
-      <button
-        type="button"
-        onClick = { () => this.setState({selected: ''}) } >
-        Home
-      </button>
-    )
-    return links;
+  selectWebsite = (url) => {
+    this.setState({selected: url}); 
   }
 
   addWebsite = (url) => {
-    this.setState({websites: [...this.state.websites, url]})
+    if(this.state.websites.indexOf(url) === -1) {
+      this.setState({websites: [...this.state.websites, url]})
+    }
   }
 
   render() {
     return (
 			<div style={{height: "100%"}}>
-				<div className="sidebar">
-          < this.sidebar />
-				</div>
+        <Sidebar websites={this.state.websites} callback={this.selectWebsite.bind(this)} />
 				<div className="content">
           <Home callback={this.addWebsite.bind(this)} selected={this.state.selected}/>
           <this.content />

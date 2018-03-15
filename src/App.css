@@ -28,14 +28,11 @@
 }
 
 .content {
-	width: 80%;
 	height: 100%;
-	float: left;
 	background-color: white;
 }
 
 .sidebar{
-	width: 20%;
 	height: 100%;
 	float: left;
 	background-color: lightblue;
