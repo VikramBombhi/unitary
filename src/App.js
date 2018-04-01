@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 import './App.css'
-import Webview from './Webview.js'
-import Home from './Home.js'
-import Sidebar from './Sidebar.js'
+import Webview from './components/Webview.js'
+import Home from './components/Home.js'
+import Sidebar from './components/Sidebar.js'
+const {saveState, getOldState} = window.require('electron').remote.require('./electronStarter.js')
 
 class App extends Component {
   constructor(props) {
     super(props)
+
+    let oldState = getOldState()
+    if(!Array.isArray(oldState.websites)) oldState.websites = []
+    if(!typeof oldState.selected === 'string') oldState.selected = ''
+
     this.state = {
-      websites: ["https://www.github.com/"],
-      selected: "",
+      websites: oldState.websites,
+      selected: oldState.selected,
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    saveState(this.state)
   }
 
   content = () => {
