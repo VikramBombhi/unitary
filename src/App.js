@@ -3,7 +3,7 @@ import './App.css'
 import Webview from './components/Webview.js'
 import Home from './components/Home.js'
 import Sidebar from './components/Sidebar.js'
-const {saveState, getOldState} = window.require('electron').remote.require('./electronStarter.js')
+const {saveState, getOldState} = window.require('electron').remote.require('./electron.js')
 
 class App extends Component {
   constructor(props) {
